@@ -1,0 +1,17 @@
+{{- if .Values.server.route.enabled -}}
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  labels:
+    app: {{ template "prometheus.name" . }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+    component: "{{ .Values.server.name }}"
+    heritage: {{ .Release.Service }}
+    release: {{ .Release.Name }}
+  name: {{ template "prometheus.server.fullname" . }}
+spec:
+  host: {{ .Values.server.route.application_domain | quote }}
+  to:
+    kind: Service
+    name: {{ template "prometheus.server.fullname" . }}
+{{- end }}

@@ -1,0 +1,18 @@
+
+Once you have the {{ template "kafka.fullname" . }}-cli pod running, you can list all kafka topics with:
+
+oc -n kafka exec {{ template "kafka.fullname" . }}-cli -- ./bin/kafka-topics.sh --zookeeper {{ .Release.Name }}-zookeeper:2181 --list
+
+To create a new topic:
+oc -n kafka exec {{ template "kafka.fullname" . }}-cli -- ./bin/kafka-topics.sh --zookeeper {{ .Release.Name }}-zookeeper:2181 --topic test1 --create --partitions 1 --replication-factor 1
+
+To listen for messages on a topic:
+oc -n kafka exec -ti {{ template "kafka.fullname" . }}-cli -- ./bin/kafka-console-consumer.sh --bootstrap-server {{ .Release.Name }}-kafka:9092 --topic test1 --from-beginning
+
+To stop the listener session above press: Ctrl+C
+
+To start an interactive message producer session:
+oc -n kafka exec -ti {{ template "kafka.fullname" . }}-cli -- ./bin/kafka-console-producer.sh --broker-list {{ .Release.Name }}-kafka-headless:9092 --topic test1
+
+To create a message in the above session, simply type the message and press "enter"
+To end the producer session try: Ctrl+C

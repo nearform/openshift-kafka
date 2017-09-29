@@ -21,7 +21,7 @@ releases=(
 )
 
 # Create a new project
-oc new-project "$NAMESPACE" --display-name="Apache Kakfa" --description="Apache Kafka cluster using Stateful Sets and Zookeper"
+oc new-project "$NAMESPACE" --display-name="Apache Kakfa" --description="Apache Kafka cluster using Stateful Sets and Zookeper" || true
 
 # Install Helm charts
 for name in "${!releases[@]}"; do

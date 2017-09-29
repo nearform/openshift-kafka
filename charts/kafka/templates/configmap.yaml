@@ -11,7 +11,7 @@ metadata:
 data:
   kafka-prometheus-monitoring.yml: |
     lowercaseOutputName: true
-    jmxUrl: service:jmx:rmi:///jndi/rmi://{{ .Release.Name }}-kafka-headless:5555/jmxrmi
+    jmxUrl: service:jmx:rmi:///jndi/rmi://{{ template "kafka.fullname" . }}-headless:5555/jmxrmi
     rules:
     - pattern: kafka.cluster<type=(.+), name=(.+), topic=(.+), partition=(.+)><>Value
       name: kafka_cluster_$1_$2

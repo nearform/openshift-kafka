@@ -8,9 +8,9 @@ configure:
 install:
 	./bin/install.sh
 
-.PHONY: deploy-producer
+.PHONY: start-producer
 start-producer:
-	helm install --name producer --namespace $(NAMESPACE) -f ./producer/values.yaml ./charts/nodejs
+	helm install --name producer --namespace $(NAMESPACE) -f ./values/producer.yaml ./charts/nodejs
 
 .PHONY: start-consumer
 start-consumer:

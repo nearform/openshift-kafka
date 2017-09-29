@@ -69,14 +69,14 @@ spec:
             port: 5556
           initialDelaySeconds: 100
           periodSeconds: 10
-          timeoutSeconds: 10
+          timeoutSeconds: 15
         readinessProbe:
           httpGet:
             path: /metrics
             port: 5556
           initialDelaySeconds: 100
           periodSeconds: 10
-          timeoutSeconds: 10
+          timeoutSeconds: 15
         command:
         - sh
         args:

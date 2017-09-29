@@ -11,7 +11,7 @@ spec:
         name: {{ .Values.name | quote }}
     spec:
       containers:
-      - name: producer
+      - name: {{ .Values.name | quote }}
         image: {{ .Values.image | quote }}
         imagePullPolicy: Always
         env:

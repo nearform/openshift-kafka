@@ -1,7 +1,7 @@
 # Name: The name assigned to all of the frontend objects defined in this template.
-name: producer
+name: pusher
 # Docker image ref
-image: docker-registry.default.svc:5000/kafka/producer:1.0.2
+image: docker-registry.default.svc:5000/kafka/pusher:1.0.0
 # Number of replicas
 replicas: 3
 # Environment variables
@@ -10,6 +10,8 @@ env:
   value: kafka-kafka-headless
 - name: BROKER_PORT
   value: "9092"
+- name: GROUP_ID
+  value: "kafka1"
 - name: TOPIC
   value: test1
 - name: KEY

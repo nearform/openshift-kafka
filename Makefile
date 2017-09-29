@@ -9,9 +9,9 @@ configure:
 install:
 	./bin/install.sh
 
-.PHONY: start-untubo-producer
-start-untubo-producer:
-	helm install --name producer --namespace $(NAMESPACE) -f ./values/producer.yaml ./charts/nodejs
+.PHONY: start-untubo-pusher
+start-untubo-pusher:
+	helm install --name untubo --namespace $(NAMESPACE) -f ./values/untubo.pusher.yaml ./charts/nodejs
 
 .PHONY: start-twitter-producer
 start-twitter-producer:

@@ -4,6 +4,7 @@ const envs = process.env;
 
 const options = {
   "metadata.broker.list": `${envs.BROKER_HOSTNAME}:${envs.BROKER_PORT}`,
+  "group.id": envs.GROUP_ID,
   topic: envs.TOPIC,
   key: envs.KEY
 };

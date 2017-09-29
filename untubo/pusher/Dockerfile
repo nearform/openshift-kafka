@@ -1,5 +1,7 @@
 FROM node:boron
 
+LABEL maintainer="salvatore.mazzarino@nearform.com"
+
 RUN apt-get update && apt-get install -y libsasl2-dev
 
 # Create app directory

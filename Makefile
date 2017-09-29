@@ -11,7 +11,11 @@ install:
 
 .PHONY: start-untubo-pusher
 start-untubo-pusher:
-	helm install --name untubo --namespace $(NAMESPACE) -f ./values/untubo.pusher.yaml ./charts/nodejs
+	helm install --name untubo-pusher --namespace $(NAMESPACE) -f ./values/untubo.pusher.yaml ./charts/nodejs
+
+.PHONY: start-untubo-puller
+start-untubo-puller:
+	helm install --name untubo-puller --namespace $(NAMESPACE) -f ./values/untubo.puller.yaml ./charts/nodejs
 
 .PHONY: start-twitter-pusher
 start-twitter-pusher:

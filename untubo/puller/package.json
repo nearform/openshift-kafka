@@ -1,7 +1,7 @@
 {
-  "name": "untubo-pusher",
+  "name": "untubo-puller",
   "version": "1.0.0",
-  "description": "Untubo Kafka pusher",
+  "description": "Untubo Kafka puller",
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js"

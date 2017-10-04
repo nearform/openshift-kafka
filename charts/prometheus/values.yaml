@@ -40,6 +40,11 @@ alertmanager:
   ##
   configMapOverrideName: ""
 
+  route:
+    enabled: false
+
+    application_domain:
+
   ## Node labels for alertmanager pod assignment
   ## Ref: https://kubernetes.io/docs/user-guide/node-selection/
   ##
@@ -438,6 +443,11 @@ pushgateway:
   ## Additional pushgateway container arguments
   ##
   extraArgs: {}
+
+  route:
+    enabled: false
+
+    application_domain:
 
   ## Node labels for pushgateway pod assignment
   ## Ref: https://kubernetes.io/docs/user-guide/node-selection/

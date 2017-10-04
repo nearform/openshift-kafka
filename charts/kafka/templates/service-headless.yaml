@@ -13,6 +13,8 @@ spec:
   ports:
   - name: broker
     port: 9092
+  - name: exporter
+    port: 5556
   clusterIP: None
   selector:
     app: {{ include "kafka.name" . | quote }}

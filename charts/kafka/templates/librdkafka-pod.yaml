@@ -1,0 +1,20 @@
+{{- if .Values.librdkafka.enabled }}
+apiVersion: v1
+kind: Pod
+metadata:
+  name: {{ template "kafka.fullname" . }}-librdkafka
+  labels:
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: {{ .Release.Name | quote }}
+    heritage: {{ .Release.Service | quote }}
+spec:
+  containers:
+  - name: {{ template "kafka.name" . }}-librdkafka
+    image: "{{ .Values.librdkafka.image.repository }}:{{ .Values.librdkafka.image.tag }}"
+    imagePullPolicy: "{{ .Values.librdkafka.image.pullPolicy }}"
+    command:
+    - sh
+    - -c
+    - "exec tail -f /dev/null"
+{{- end }}
+

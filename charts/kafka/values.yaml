@@ -6,15 +6,21 @@ Replicas: 3
 Image: "solsson/kafka"
 ImageTag: "0.11.0.0"
 ImagePullPolicy: "IfNotPresent"
-resources:
-  limits:
-    cpu: 1
-    memory: 1536Mi
-  requests:
-    cpu: 500m
-    memory: 1024Mi
-Storage: "1Gi"
+resources: {}
+Storage: "500Gi"
 DataDirectory: "/opt/kafka/data"
+
+kafkacat:
+  enabled: false
+
+librdkafka:
+  enabled: true
+
+  image:
+    repository: mazzy/librdkafka
+    tag: "0.11.0"
+    pullPolicy: IfNotPresent
+
 Metrics:
   enabled: true
 

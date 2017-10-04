@@ -520,9 +520,6 @@ serverFiles:
             - kafka-kafka-0.kafka-kafka-headless:5556
             - kafka-kafka-1.kafka-kafka-headless:5556
             - kafka-kafka-2.kafka-kafka-headless:5556
-            - kafka-kafka-3.kafka-kafka-headless:5556
-            - kafka-kafka-4.kafka-kafka-headless:5556
-            - kafka-kafka-5.kafka-kafka-headless:5556
         relabel_configs:
           - source_labels: [__address__]
             regex: '(.+)\..*'

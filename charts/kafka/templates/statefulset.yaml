@@ -47,6 +47,11 @@ spec:
         - sh
         - -c
         - "JMX_PORT=5555 ./bin/kafka-server-start.sh config/server.properties --override zookeeper.connect={{ .Release.Name }}-zookeeper:2181/ --override zookeeper.connection.timeout.ms=60000 --override log.dirs={{ printf "%s/logs" .Values.DataDirectory }} --override broker.id=${HOSTNAME##*-}"
+        env:
+        - name: KAFKA_HEAP_OPTS
+          value: "-Xmx8G -Xms6G"
+        - name: KAFKA_JVM_PERFORMANCE_OPTS
+          value: "-server -XX:MetaspaceSize=96m  -XX:G1HeapRegionSize=16M -XX:MinMetaspaceFreeRatio=50 -XX:MaxMetaspaceFreeRatio=80 -XX:+UseG1GC -XX:MaxGCPauseMillis=20 -XX:InitiatingHeapOccupancyPercent=35 -XX:+ExplicitGCInvokesConcurrent -Djava.awt.headless=true"
         volumeMounts:
         - name: datadir
           mountPath: "{{ .Values.DataDirectory }}"

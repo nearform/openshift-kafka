@@ -40,31 +40,6 @@ alertmanager:
   ##
   configMapOverrideName: ""
 
-  ingress:
-    ## If true, alertmanager Ingress will be created
-    ##
-    enabled: false
-
-    ## alertmanager Ingress annotations
-    ##
-    annotations: {}
-    #   kubernetes.io/ingress.class: nginx
-    #   kubernetes.io/tls-acme: 'true'
-
-    ## alertmanager Ingress hostnames
-    ## Must be provided if Ingress is enabled
-    ##
-    hosts: []
-    #   - alertmanager.domain.com
-
-    ## alertmanager Ingress TLS configuration
-    ## Secrets must be manually created in the namespace
-    ##
-    tls: []
-    #   - secretName: prometheus-alerts-tls
-    #     hosts:
-    #       - alertmanager.domain.com
-
   ## Node labels for alertmanager pod assignment
   ## Ref: https://kubernetes.io/docs/user-guide/node-selection/
   ##
@@ -267,7 +242,8 @@ nodeExporter:
   ## Node labels for node-exporter pod assignment
   ## Ref: https://kubernetes.io/docs/user-guide/node-selection/
   ##
-  nodeSelector: {}
+  nodeSelector:
+    role: app
 
   ## Annotations to be added to node-exporter pods
   ##
@@ -348,33 +324,6 @@ server:
     enabled: true
 
     application_domain: prometheus-server-kafka.apps.os.nearform.net
-
-  ingress:
-    ## If true, Prometheus server Ingress will be created
-    ##
-    enabled: false
-
-    ## Prometheus server Ingress annotations
-    ##
-    annotations: {}
-    #   kubernetes.io/ingress.class: nginx
-    #   kubernetes.io/tls-acme: 'true'
-
-    ## Prometheus server Ingress hostnames
-    ## Must be provided if Ingress is enabled
-    ##
-    hosts: []
-    #   - prometheus.domain.com
-
-    ## Prometheus server Ingress TLS configuration
-    ## Secrets must be manually created in the namespace
-    ##
-    tls: []
-    #   - secretName: prometheus-server-tls
-    #     hosts:
-    #       - prometheus.domain.com
-
-
 
   ## Node tolerations for server scheduling to nodes with taints
   ## Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
@@ -490,31 +439,6 @@ pushgateway:
   ##
   extraArgs: {}
 
-  ingress:
-    ## If true, pushgateway Ingress will be created
-    ##
-    enabled: false
-
-    ## pushgateway Ingress annotations
-    ##
-    annotations:
-    #   kubernetes.io/ingress.class: nginx
-    #   kubernetes.io/tls-acme: 'true'
-
-    ## pushgateway Ingress hostnames
-    ## Must be provided if Ingress is enabled
-    ##
-    hosts: []
-    #   - pushgateway.domain.com
-
-    ## pushgateway Ingress TLS configuration
-    ## Secrets must be manually created in the namespace
-    ##
-    tls: []
-    #   - secretName: prometheus-alerts-tls
-    #     hosts:
-    #       - pushgateway.domain.com
-
   ## Node labels for pushgateway pod assignment
   ## Ref: https://kubernetes.io/docs/user-guide/node-selection/
   ##
@@ -593,7 +517,18 @@ serverFiles:
         scrape_interval: 10s
         static_configs:
           - targets:
-            - kafka-kafka-headless:5556
+            - kafka-kafka-0.kafka-kafka-headless:5556
+            - kafka-kafka-1.kafka-kafka-headless:5556
+            - kafka-kafka-2.kafka-kafka-headless:5556
+            - kafka-kafka-3.kafka-kafka-headless:5556
+            - kafka-kafka-4.kafka-kafka-headless:5556
+            - kafka-kafka-5.kafka-kafka-headless:5556
+        relabel_configs:
+          - source_labels: [__address__]
+            regex: '(.+)\..*'
+            target_label: instance
+            replacement: ${1}
+
 
       # A scrape configuration for running Prometheus on a Kubernetes cluster.
       # This uses separate scrape configs for cluster components (i.e. API server, node)

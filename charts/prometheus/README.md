@@ -52,10 +52,6 @@ Parameter | Description | Default
 `alertmanager.baseURL` | The prefix slug at which the server can be accessed | ``
 `alertmanager.extraArgs` | Additional alertmanager container arguments | `{}`
 `alertmanager.configMapOverrideName` | Prometheus alertmanager ConfigMap override where full-name is `{{.Release.Name}}-{{.Values.alertmanager.configMapOverrideName}}` and setting this value will prevent the default alertmanager ConfigMap from being generated | `""`
-`alertmanager.ingress.enabled` | If true, alertmanager Ingress will be created | `false`
-`alertmanager.ingress.annotations` | alertmanager Ingress annotations | `{}`
-`alertmanager.ingress.hosts` | alertmanager Ingress hostnames | `[]`
-`alertmanager.ingress.tls` | alertmanager Ingress TLS configuration (YAML) | `[]`
 `alertmanager.nodeSelector` | node labels for alertmanager pod assignment | `{}`
 `alertmanager.persistentVolume.enabled` | If true, alertmanager will create a Persistent Volume Claim | `true`
 `alertmanager.persistentVolume.accessModes` | alertmanager data Persistent Volume access modes | `[ReadWriteOnce]`
@@ -124,10 +120,6 @@ Parameter | Description | Default
 `pushgateway.image.tag` | pushgateway container image tag | `v0.4.0`
 `pushgateway.image.pullPolicy` | pushgateway container image pull policy | `IfNotPresent`
 `pushgateway.extraArgs` | Additional pushgateway container arguments | `{}`
-`pushgateway.ingress.enabled` | If true, pushgateway Ingress will be created | `false`
-`pushgateway.ingress.annotations` | pushgateway Ingress annotations | `{}`
-`pushgateway.ingress.hosts` | pushgateway Ingress hostnames | `[]`
-`pushgateway.ingress.tls` | pushgateway Ingress TLS configuration (YAML) | `[]`
 `pushgateway.nodeSelector` | node labels for pushgateway pod assignment | `{}`
 `pushgateway.podAnnotations` | annotations to be added to pushgateway pods | `{}`
 `pushgateway.replicaCount` | desired number of pushgateway pods | `1`
@@ -149,10 +141,6 @@ Parameter | Description | Default
 `server.baseURL` | The prefix slug at which the server can be accessed | ``
 `server.extraHostPathMounts` | Additional Prometheus server hostPath mounts | `[]`
 `server.configMapOverrideName` | Prometheus server ConfigMap override where full-name is `{{.Release.Name}}-{{.Values.server.configMapOverrideName}}` and setting this value will prevent the default server ConfigMap from being generated | `""`
-`server.ingress.enabled` | If true, Prometheus server Ingress will be created | `false`
-`server.ingress.annotations` | Prometheus server Ingress annotations | `[]`
-`server.ingress.hosts` | Prometheus server Ingress hostnames | `[]`
-`server.ingress.tls` | Prometheus server Ingress TLS configuration (YAML) | `[]`
 `server.nodeSelector` | node labels for Prometheus server pod assignment | `{}`
 `server.tolerations` | node taints to tolerate (requires Kubernetes >=1.6) | `[]`
 `server.persistentVolume.enabled` | If true, Prometheus server will create a Persistent Volume Claim | `true`

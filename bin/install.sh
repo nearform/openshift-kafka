@@ -5,6 +5,7 @@ set -o pipefail
 set -o xtrace
 
 HELM_DIR=./charts
+HELM_VALUES=./values
 NAMESPACE=kafka
 
 if [[ $BASH_VERSION =~ ^3$ ]]; then
@@ -16,8 +17,6 @@ fi
 declare -A releases
 releases=(
     [kafka]='0.3.0'
-    [prometheus]='4.5.0'
-    [grafana]='0.5.0'
 )
 
 # Create a new project
@@ -25,5 +24,5 @@ oc new-project "$NAMESPACE" --display-name="Apache Kakfa" --description="Apache 
 
 # Install Helm charts
 for name in "${!releases[@]}"; do
-    helm install --name "$name" --namespace "$NAMESPACE" --version "${releases[$name]}" "$HELM_DIR"/"$name"
+    helm install --name "$name" --namespace "$NAMESPACE" --version "${releases[$name]}" -f "$HELM_VALUES"/"$name".yaml "$HELM_DIR"/"$name"
 done

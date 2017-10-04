@@ -1,1 +1,0 @@
-The following service(s) have been created in your project: {{ .Values.name }}.

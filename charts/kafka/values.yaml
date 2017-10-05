@@ -35,7 +35,7 @@ ui:
 
   route:
     enabled: true
-    application_domain: kafka-manager.kafka.apps.os.nearform.net
+    application_domain:
 
 Metrics:
   enabled: true

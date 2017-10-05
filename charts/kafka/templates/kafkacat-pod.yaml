@@ -4,8 +4,10 @@ kind: Pod
 metadata:
   name: {{ template "kafka.fullname" . }}-kafkacat
   labels:
+    app: {{ include "kafka.name" . | quote }}
     chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
     release: {{ .Release.Name | quote }}
+    component: "{{ .Values.kafkacat.name }}"
     heritage: {{ .Release.Service | quote }}
 spec:
   containers:

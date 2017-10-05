@@ -1,0 +1,17 @@
+{{- if and .Values.ui.enabled .Values.ui.route.enabled -}}
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: {{ template "kafka.fullname" . }}-ui
+  labels:
+    app: {{ include "kafka.name" . | quote }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    component: "{{ .Values.ui.name }}"
+    release: {{ .Release.Name | quote }}
+    heritage: {{ .Release.Service | quote }}
+spec:
+  host: {{ .Values.ui.route.application_domain | quote }}
+  to:
+    kind: Service
+    name: {{ template "kafka.fullname" . }}-ui
+{{- end }}

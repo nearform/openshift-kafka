@@ -6,6 +6,7 @@ metadata:
     app: {{ include "kafka.name" . | quote }}
     chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
     release: {{ .Release.Name | quote }}
+    component: "{{ .Values.name }}"
     heritage: {{ .Release.Service | quote }}
 spec:
   serviceName: {{ template "kafka.fullname" . }}-headless
@@ -15,6 +16,7 @@ spec:
       labels:
         app: {{ include "kafka.name" . | quote }}
         release: {{ .Release.Name | quote }}
+        component: "{{ .Values.name }}"
     spec:
       containers:
       - name: {{ template "kafka.name" . }}-broker

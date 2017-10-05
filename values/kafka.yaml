@@ -2,6 +2,7 @@
 # Kafka:
 #------------------------------------------------------------------------------
 
+name: broker
 Replicas: 3
 Image: "solsson/kafka"
 ImageTag: "0.11.0.0"
@@ -12,14 +13,29 @@ DataDirectory: "/opt/kafka/data"
 
 kafkacat:
   enabled: false
+  name: kafkacat
 
 librdkafka:
   enabled: true
+  name: librdkafka
 
   image:
     repository: mazzy/librdkafka
     tag: "0.11.0"
     pullPolicy: IfNotPresent
+
+ui:
+  enabled: true
+  name: kafkamanager
+
+  image:
+    repository: mazzy/kafka-manager
+    tag: "1.3.3.14"
+    pullPolicy: IfNotPresent
+
+  route:
+    enabled: true
+    application_domain: kafka-manager.kafka.apps.os.nearform.net
 
 Metrics:
   enabled: true

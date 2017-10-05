@@ -5,6 +5,7 @@ metadata:
   labels:
     app: {{ include "kafka.name" . | quote }}
     chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    component: "{{ .Values.name }}"
     release: {{ .Release.Name | quote }}
     heritage: {{ .Release.Service | quote }}
   annotations:
@@ -18,4 +19,5 @@ spec:
   clusterIP: None
   selector:
     app: {{ include "kafka.name" . | quote }}
+    component: "{{ .Values.name }}"
     release: {{ .Release.Name | quote }}

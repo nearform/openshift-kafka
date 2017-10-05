@@ -4,8 +4,10 @@ kind: Pod
 metadata:
   name: {{ template "kafka.fullname" . }}-librdkafka
   labels:
+    app: {{ include "kafka.name" . | quote }}
     chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
     release: {{ .Release.Name | quote }}
+    component: "{{ .Values.librdkafka.name }}"
     heritage: {{ .Release.Service | quote }}
 spec:
   containers:
@@ -17,4 +19,3 @@ spec:
     - -c
     - "exec tail -f /dev/null"
 {{- end }}
-

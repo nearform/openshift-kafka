@@ -1,6 +1,3 @@
-NAMESPACE ?= kafka
-TW_TRACK ?= javascript
-
 .PHONY: configure
 configure:
 	./bin/configure.sh
